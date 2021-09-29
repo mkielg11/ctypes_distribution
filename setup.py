@@ -10,26 +10,11 @@ Date: 15-06-2020
 
 """
 
-from setuptools import setup, find_packages, Extension
-from distutils.command.build_ext import build_ext
+from setuptools import find_packages
+from setuptools_dso import DSO, setup
 
 
-class CTypes(Extension):
-    pass
-
-
-class build_ext_rev(build_ext):
-    def build_extension(self, ext):
-        self._ctypes = isinstance(ext, CTypes)
-        return super().build_extension(ext)
-
-    def get_export_symbols(self, ext):
-        if self._ctypes:
-            return ext.export_symbols
-        return super().get_export_symbols(ext)
-
-
-xclib_extension = CTypes(
+xclib_dso = DSO(
     'xclib',
     sources=['xpackage/deps/xclib/cfile.c', ],
     include_dirs=['xpackage/deps/xclib/include/'],
@@ -38,17 +23,15 @@ xclib_extension = CTypes(
 
 setup(
     name='xpackage',
-    version='0.0.1',
+    version='0.0.2',
     author='mkielg11',
     license='MIT',
     packages=find_packages(),
-    setup_requires=["cython", ],
+    setup_requires=["cython", "wheel", "setuptools", "setuptools_dso"],
     python_requires=">=3.6",
     install_requires=[
         'numpy',
     ],
-    ext_modules=[
-        xclib_extension
-    ],
-    cmdclass={'build_ext': build_ext_rev},
+    x_dsos=[xclib_dso],
+    zip_safe=False,
 )

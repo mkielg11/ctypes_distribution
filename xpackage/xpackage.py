@@ -15,11 +15,13 @@ from glob import glob
 
 
 def _get_cdll_path(libname, file_suffix='.pyd'):
-    return glob('../build/*/'+libname+'*'+file_suffix)[0]
+    # fname = setuptools_dso.find_dso('my.pkg.libs.adso')
+    return glob('../build/lib/'+libname+'*'+file_suffix)[0]
 
 
 def xpackage_function():
-    xlib = ctypes.cdll.LoadLibrary(_get_cdll_path('xclib'))
+    _path = _get_cdll_path('xclib', '.dll')
+    xlib = ctypes.cdll.LoadLibrary(_path)
 
     get_magic_number_func = xlib.return_magic_number
     get_magic_number_func.restype = ctypes.c_int

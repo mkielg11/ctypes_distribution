@@ -1,0 +1,4 @@
+include LICENSE
+recursive-include xpackage *.c
+recursive-include xpackage *.cpp
+recursive-include xpackage *.h

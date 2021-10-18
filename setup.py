@@ -15,9 +15,11 @@ from setuptools_dso import DSO, setup
 
 
 xclib_dso = DSO(
-    'xclib',
+    'cfile',
     sources=['xpackage/deps/xclib/cfile.c', ],
     include_dirs=['xpackage/deps/xclib/include/'],
+    extra_compile_args=['-Wall', '-c'],
+    extra_link_args=['-shared', ]
 )
 
 

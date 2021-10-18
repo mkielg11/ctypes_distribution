@@ -20,7 +20,7 @@ def _get_cdll_path(libname, file_suffix='.pyd'):
 
 
 def xpackage_function():
-    _path = _get_cdll_path('xclib', '.dll')
+    _path = _get_cdll_path('cfile', '.dll')
     xlib = ctypes.cdll.LoadLibrary(_path)
 
     get_magic_number_func = xlib.return_magic_number

@@ -13,14 +13,13 @@ Date: 15-06-2020
 import ctypes
 from glob import glob
 
+from .clib import cfile_sofilename
 
-def _get_cdll_path(libname, file_suffix='.pyd'):
-    # fname = setuptools_dso.find_dso('my.pkg.libs.adso')
-    return glob('../build/lib/'+libname+'*'+file_suffix)[0]
 
 
 def xpackage_function():
-    _path = _get_cdll_path('cfile', '.dll')
+    # _path = _get_cdll_path('libcfile', '.so')
+    _path = cfile_sofilename
     xlib = ctypes.cdll.LoadLibrary(_path)
 
     get_magic_number_func = xlib.return_magic_number

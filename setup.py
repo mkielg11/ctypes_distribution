@@ -15,7 +15,7 @@ from setuptools_dso import DSO, setup
 
 
 xclib_dso = DSO(
-    'cfile',
+    'xpackage.clib.cfile',
     sources=['xpackage/deps/xclib/cfile.c', ],
     include_dirs=['xpackage/deps/xclib/include/'],
     extra_compile_args=['-Wall', '-c'],
@@ -25,7 +25,7 @@ xclib_dso = DSO(
 
 setup(
     name='xpackage',
-    version='0.0.2',
+    version='0.0.4',
     author='mkielg11',
     license='MIT',
     packages=find_packages(),
@@ -34,6 +34,6 @@ setup(
     install_requires=[
         'numpy',
     ],
-    x_dsos=[xclib_dso],
+    x_dsos=[xclib_dso, ],
     zip_safe=False,
 )

@@ -11,14 +11,11 @@ Date: 15-06-2020
 """
 
 import ctypes
-from glob import glob
 
 from .clib import cfile_sofilename
 
 
-
 def xpackage_function():
-    # _path = _get_cdll_path('libcfile', '.so')
     _path = cfile_sofilename
     xlib = ctypes.cdll.LoadLibrary(_path)
 
